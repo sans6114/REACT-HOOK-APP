@@ -1,9 +1,9 @@
 import { NavBar } from '../src/components/common/NavBar';
+import { TareaSection } from './components/Tarea/TareaSection';
 import { UseEffectSection } from './components/useEffect/UseEffectSection';
 import {
   UseFecthSection,
 } from './components/useFetchCustom/UseFetchCustomSection';
-import { UseRefSection } from './components/UseRef/UseRefSection';
 import { UseStateSection } from './components/UseState/UseStateSection';
 
 function HooksApp() {
@@ -17,7 +17,9 @@ function HooksApp() {
       <UseStateSection />
       <UseEffectSection />
       <UseFecthSection />
-      <UseRefSection />
+      {/* <UseRefSection /> esta seccion es para ver el uso de useRef Hook */}
+      {/* <UseMemoSection/> esta seccion es para ver el uso de useMemo hook */}
+      <TareaSection />
       </section>
     </>
 
