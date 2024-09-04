@@ -1,12 +1,50 @@
 import {
+  useEffect,
+  useState,
+} from 'react';
+
+import {
   Button,
   Card,
 } from 'flowbite-react';
 
+import { Message } from './Message';
+
 export const SimpleForm = ({ title }) => {
 
+    const [formState, setFormState] = useState({
+        username: 'santiago',
+        email: 'santiago@gmail.com'
+    })
+    const { username, email } = formState
+
+
+    const onInputChange = ({ target }) => {
+        const { name, value } = target
+        setFormState({
+            ...formState,
+            [name]: value
+        })
+    }
+    const onSubmit = (event) => {
+        event.preventDefault();
+        console.log('Form submitted with:', formState);
+    };
+
+    useEffect(() => {
+        console.log('useeffect used')
+    }, [formState])
+
+    
+    useEffect(() => {
+        console.log('useeffect used with email')
+    }, [email])
+
+
+    const className = 'bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500'
+
     return (
-        <Card href="#" className="w-96 h-96 my-10 flex flex-col text-center">
+        <Card href="#" className="my-10 flex flex-col text-center">
             <h2 className='text-4xl font-extrabold dark:text-white'>
                 {title}
             </h2>
@@ -17,38 +55,41 @@ export const SimpleForm = ({ title }) => {
             </div>
 
 
-            <form className="w-full">
-                <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
-                    Search
-                </label>
-                <div className="flex">
-                    <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
-                        <svg
-                            className="w-4 h-4 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true"
-                            xmlns="http://www.w3.org/2000/svg"
-                            fill="none"
-                            viewBox="0 0 20 20"
-                        >
-                            <path
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth="2"
-                                d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                            />
-                        </svg>
-                    </div>
-                    <input
-                        type="search"
-                        id="default-search"
-                        className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search Mockups, Logos..."
-                        required
-                    />
-                    <Button>Search</Button>
-                </div>
+            <form
+                aria-label='form'
+                className='flex flex-col gap-y-2'
+                onSubmit={onSubmit}
+            >
+
+                <input
+                    onChange={onInputChange}
+                    name='username'
+                    value={username}
+                    placeholder="Search category"
+                    type="text"
+                    id="default-input"
+                    className={className}
+                />
+
+                <input
+                    onChange={onInputChange}
+                    name='email'
+                    value={email}
+                    placeholder="Search category"
+                    type="text"
+                    id="default-input"
+                    className={className}
+                />
+
+
+                <Button type='submit'>Search</Button>
             </form>
+            <h5 className="text-sm font-bold tracking-tight text-gray-900 dark:text-white mb-5">
+                    if you put santiago2, in Username you will have message
+                </h5>
+            {
+                (username === 'santiago2' && <Message/>)
+            }
 
 
 
