@@ -14,7 +14,7 @@ export function myReducer(todoList, action) {
         case 'change': {
             return todoList.map((todo) => {
                 if (todo.id === action.task.id) {
-                    return { ...todo, done: !todo.done };
+                    return { ...todo, task:action.task.task, done: !todo.done };
                 } else {
                     return todo;
                 }
